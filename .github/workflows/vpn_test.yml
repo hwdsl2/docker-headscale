@@ -1,0 +1,91 @@
+name: vpn_test
+
+on: workflow_call
+
+jobs:
+  vpn_test:
+    runs-on: ubuntu-24.04
+    if: github.repository_owner == 'hwdsl2'
+    strategy:
+      matrix:
+        test_id: [no-env, with-env]
+      fail-fast: false
+    env:
+      TEST_ID: ${{ matrix.test_id }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Test
+        run: |
+          [ ! -x /usr/bin/docker ] && exit 1
+
+          cd "$GITHUB_WORKSPACE"
+          pwd
+          ls -ld vpn.env.example
+
+          sed -i \
+            -e '/HS_SERVER_URL=/s/# //' \
+            -e '/HS_USERNAME=/s/# //' \
+            vpn.env.example
+
+          set -x
+
+          docker build -t vpn-test .
+
+          if [ "$TEST_ID" = "with-env" ]; then
+            docker run \
+              --name "$TEST_ID" \
+              --restart=always \
+              -v headscale-test-data:/var/lib/headscale \
+              -v ./vpn.env.example:/vpn.env:ro \
+              -p 8080:8080/tcp \
+              -d \
+              vpn-test
+          elif [ "$TEST_ID" = "no-env" ]; then
+            docker run \
+              --name "$TEST_ID" \
+              --restart=always \
+              -v headscale-test-data:/var/lib/headscale \
+              -p 8080:8080/tcp \
+              -d \
+              vpn-test
+          fi
+
+          sleep 60
+          docker ps | grep "$TEST_ID"
+          docker logs "$TEST_ID"
+          docker exec "$TEST_ID" test -S /var/run/headscale/headscale.sock
+          docker exec "$TEST_ID" cat /etc/headscale/config.yaml
+          docker exec "$TEST_ID" hs_manage --listusers
+          docker exec "$TEST_ID" hs_manage --listusers | grep -q 'admin'
+          docker exec "$TEST_ID" hs_manage --listkeys
+
+          if [ "$TEST_ID" = "with-env" ]; then
+            docker exec "$TEST_ID" grep 'server_url: https://hs.example.com' \
+              /etc/headscale/config.yaml
+            docker exec "$TEST_ID" hs_manage --adduser vpnuser
+            docker exec "$TEST_ID" hs_manage --listusers | grep -q 'vpnuser'
+            docker exec "$TEST_ID" hs_manage --createkey --user admin
+            docker exec "$TEST_ID" hs_manage --listkeys
+            docker exec "$TEST_ID" hs_manage --listnodes
+          else
+            docker exec "$TEST_ID" hs_manage --adduser testuser
+            docker exec "$TEST_ID" hs_manage --listusers | grep -q 'testuser'
+            docker exec "$TEST_ID" hs_manage --listnodes
+          fi
+
+          docker restart "$TEST_ID"
+
+          sleep 20
+          docker ps | grep "$TEST_ID"
+          docker logs "$TEST_ID"
+          docker exec "$TEST_ID" test -S /var/run/headscale/headscale.sock
+
+          exit 0
+      - name: Clear
+        if: always()
+        run: |
+          docker rm -f "$TEST_ID" || true
+          docker volume rm headscale-test-data || true
+          docker rmi vpn-test || true
