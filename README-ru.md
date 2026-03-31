@@ -105,12 +105,6 @@ volumes:
 docker exec headscale hs_manage --registernode <key> --user admin
 ```
 
-**Список пользователей:**
-
-```bash
-docker exec headscale hs_manage --listusers
-```
-
 **Добавить пользователя:**
 
 ```bash
@@ -129,6 +123,12 @@ docker exec headscale hs_manage --deleteuser alice --yes
 
 ```bash
 docker exec headscale hs_manage --createkey --user alice
+```
+
+**Список пользователей:**
+
+```bash
+docker exec headscale hs_manage --listusers
 ```
 
 **Список всех зарегистрированных узлов:**
@@ -157,13 +157,27 @@ docker exec headscale hs_manage --deletenode 3 --yes
 docker exec headscale hs_manage --listkeys
 ```
 
+**Список ключей предварительной авторизации конкретного пользователя:**
+
+```bash
+docker exec headscale hs_manage --listkeys --user alice
+```
+
 **Показать справку:**
 
 ```bash
 docker exec headscale hs_manage --help
 ```
 
-Также можно выполнять команды Headscale напрямую с помощью `docker exec headscale headscale <команда>`. Доступные команды см. в [документации Headscale](https://headscale.net/).
+Также можно выполнять команды Headscale напрямую с помощью `docker exec headscale headscale <команда>`. Выполните `docker exec headscale headscale -h` или см. [документацию Headscale](https://headscale.net/) для просмотра доступных команд.
+
+## Настройка клиентов
+
+Инструкции по подключению клиентов см. в документации Headscale:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## Переменные окружения
 
@@ -193,7 +207,7 @@ docker exec headscale hs_manage --help
 
 > **Примечание:** Не используйте внутренний IP-адрес контейнера, полученный через `docker inspect`. Этот адрес меняется при каждом пересоздании контейнера.
 
-**Пример с Caddy** (автоматический TLS через Let's Encrypt, обратный прокси в той же Docker-сети):
+**Пример с [Caddy](https://caddyserver.com/docs/) ([Docker-образ](https://hub.docker.com/_/caddy))** (автоматический TLS через Let's Encrypt, обратный прокси в той же Docker-сети):
 
 `Caddyfile`:
 ```

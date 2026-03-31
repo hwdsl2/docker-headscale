@@ -105,12 +105,6 @@ volumes:
 docker exec headscale hs_manage --registernode <key> --user admin
 ```
 
-**列出用户：**
-
-```bash
-docker exec headscale hs_manage --listusers
-```
-
 **添加用户：**
 
 ```bash
@@ -129,6 +123,12 @@ docker exec headscale hs_manage --deleteuser alice --yes
 
 ```bash
 docker exec headscale hs_manage --createkey --user alice
+```
+
+**列出用户：**
+
+```bash
+docker exec headscale hs_manage --listusers
 ```
 
 **列出所有已注册节点：**
@@ -157,13 +157,27 @@ docker exec headscale hs_manage --deletenode 3 --yes
 docker exec headscale hs_manage --listkeys
 ```
 
+**列出特定用户的预授权密钥：**
+
+```bash
+docker exec headscale hs_manage --listkeys --user alice
+```
+
 **显示帮助：**
 
 ```bash
 docker exec headscale hs_manage --help
 ```
 
-也可使用 `docker exec headscale headscale <命令>` 直接运行 Headscale 命令。可用命令请参阅 [Headscale 文档](https://headscale.net/)。
+也可使用 `docker exec headscale headscale <命令>` 直接运行 Headscale 命令。运行 `docker exec headscale headscale -h` 或参阅 [Headscale 文档](https://headscale.net/) 查看可用命令。
+
+## 客户端配置
+
+有关连接客户端的说明，请参阅 Headscale 文档：
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple（iOS / macOS）](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## 环境变量
 
@@ -193,7 +207,7 @@ Tailscale 客户端在使用 HTTPS 时效果最佳。推荐的配置是在 Heads
 
 > **注意：** 请勿使用通过 `docker inspect` 获取的容器内部 IP 地址。该地址在每次重新创建容器时都会改变。
 
-**使用 Caddy 的示例**（通过 Let's Encrypt 自动申请 TLS，反向代理在相同的 Docker 网络中）：
+**使用 [Caddy](https://caddyserver.com/docs/)（[Docker 镜像](https://hub.docker.com/_/caddy)）的示例**（通过 Let's Encrypt 自动申请 TLS，反向代理在相同的 Docker 网络中）：
 
 `Caddyfile`：
 ```

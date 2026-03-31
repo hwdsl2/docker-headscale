@@ -105,12 +105,6 @@ Use the `hs_manage` helper to manage users and nodes from the host without enter
 docker exec headscale hs_manage --registernode <key> --user admin
 ```
 
-**List users:**
-
-```bash
-docker exec headscale hs_manage --listusers
-```
-
 **Add a user:**
 
 ```bash
@@ -129,6 +123,12 @@ docker exec headscale hs_manage --deleteuser alice --yes
 
 ```bash
 docker exec headscale hs_manage --createkey --user alice
+```
+
+**List users:**
+
+```bash
+docker exec headscale hs_manage --listusers
 ```
 
 **List all registered nodes:**
@@ -157,13 +157,27 @@ docker exec headscale hs_manage --deletenode 3 --yes
 docker exec headscale hs_manage --listkeys
 ```
 
+**List pre-auth keys for a specific user:**
+
+```bash
+docker exec headscale hs_manage --listkeys --user alice
+```
+
 **Show help:**
 
 ```bash
 docker exec headscale hs_manage --help
 ```
 
-You can also run Headscale commands directly using `docker exec headscale headscale <command>`. Refer to the [Headscale documentation](https://headscale.net/) for available commands.
+You can also run Headscale commands directly using `docker exec headscale headscale <command>`. Run `docker exec headscale headscale -h` or refer to the [Headscale documentation](https://headscale.net/) for available commands.
+
+## Client configuration
+
+Refer to the Headscale documentation for instructions on connecting clients:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## Environment variables
 
@@ -193,7 +207,7 @@ Use one of the following addresses to reach the Headscale container from your re
 
 > **Note:** Do not use the container's internal IP address obtained from `docker inspect`. That IP address changes every time the container is recreated.
 
-**Example with Caddy** (automatic TLS via Let's Encrypt, reverse proxy in the same Docker network):
+**Example with [Caddy](https://caddyserver.com/docs/) ([Docker image](https://hub.docker.com/_/caddy))** (automatic TLS via Let's Encrypt, reverse proxy in the same Docker network):
 
 `Caddyfile`:
 ```
