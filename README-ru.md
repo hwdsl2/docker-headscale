@@ -8,21 +8,6 @@ Docker-образ для запуска сервера [Headscale](https://githu
 
 **Также доступно:** Docker-образы для [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-ru.md) и [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md).
 
-## Загрузка
-
-Получите образ из [реестра Docker Hub](https://hub.docker.com/r/hwdsl2/headscale-server/):
-
-```bash
-docker pull hwdsl2/headscale-server
-```
-
-Либо загрузите из [Quay.io](https://quay.io/repository/hwdsl2/headscale-server):
-
-```bash
-docker pull quay.io/hwdsl2/headscale-server
-docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
-```
-
 ## Быстрый старт
 
 ### Необходимые условия
@@ -31,12 +16,10 @@ docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 
 ### Использование Docker
 
-Создайте файл с переменными окружения. Подробности см. в разделе [Переменные окружения](#переменные-окружения).
+Создайте файл `vpn.env`. `HS_SERVER_URL` — это HTTPS-адрес, по которому клиенты Tailscale подключаются к вашему серверу. Все доступные параметры см. в разделе [Переменные окружения](#переменные-окружения).
 
-```bash
-# Отредактируйте файл env, указав как минимум HS_SERVER_URL
-cp vpn.env.example vpn.env
-nano vpn.env
+```
+HS_SERVER_URL=https://hs.example.com
 ```
 
 Запустите контейнер:
@@ -45,11 +28,14 @@ nano vpn.env
 docker run \
   --name headscale \
   --restart=always \
-  -p 8080:8080/tcp \
+  -p 127.0.0.1:8080:8080/tcp \
+  -p 127.0.0.1:9090:9090/tcp \
   -v headscale-data:/var/lib/headscale \
   -v ./vpn.env:/vpn.env:ro \
   -d hwdsl2/headscale-server
 ```
+
+> **Примечание:** При использовании приведённой команды порт `8080` привязан только к локальному хосту. Для подключения клиентов Tailscale необходим обратный прокси на хосте, который обрабатывает TLS и перенаправляет трафик на `127.0.0.1:8080`. См. раздел [TLS и обратный прокси](#tls-и-обратный-прокси). Чтобы вместо этого открыть порт напрямую, замените `127.0.0.1:8080:8080` на `8080:8080`.
 
 При первом запуске контейнер:
 1. Сгенерирует конфигурацию сервера из переменных окружения
@@ -94,6 +80,102 @@ services:
 volumes:
   headscale-data:
 ```
+
+В качестве альтернативы вы можете [настроить Headscale без Docker](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md). Чтобы узнать больше о том, как использовать этот образ, прочитайте разделы ниже.
+
+## Загрузка
+
+Получите образ из [реестра Docker Hub](https://hub.docker.com/r/hwdsl2/headscale-server/):
+
+```bash
+docker pull hwdsl2/headscale-server
+```
+
+Либо загрузите из [Quay.io](https://quay.io/repository/hwdsl2/headscale-server):
+
+```bash
+docker pull quay.io/hwdsl2/headscale-server
+docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
+```
+
+## Переменные окружения
+
+Все переменные необязательны. `HS_SERVER_URL` настоятельно рекомендуется задать для production-использования.
+
+| Переменная | Значение по умолчанию | Описание |
+|---|---|---|
+| `HS_SERVER_URL` | Автоопределение | URL для подключения клиентов Tailscale (например, `https://hs.example.com`). Для полной функциональности клиентов необходим HTTPS. |
+| `HS_LISTEN_PORT` | `8080` | TCP-порт, на котором слушает сервер. |
+| `HS_METRICS_PORT` | `9090` | Порт метрик Prometheus. Оставьте пустым для отключения. |
+| `HS_BASE_DOMAIN` | `headscale.internal` | Базовый домен для имён хостов MagicDNS (например, `myhost.headscale.internal`). Не должен совпадать с именем хоста в `HS_SERVER_URL` или быть его родительским доменом (например, если `HS_SERVER_URL=https://hs.example.com`, не используйте `example.com`). |
+| `HS_USERNAME` | `admin` | Имя первого пользователя, создаваемого при начальной настройке. |
+| `HS_DNS_SRV1` | `1.1.1.1` | Основной DNS-сервер, передаваемый клиентам через MagicDNS. Принимает IPv4 или IPv6. |
+| `HS_DNS_SRV2` | `1.0.0.1` | Резервный DNS-сервер, передаваемый клиентам через MagicDNS. |
+| `HS_LOG_LEVEL` | `info` | Уровень подробности логов: `panic`, `fatal`, `error`, `warn`, `info`, `debug`, `trace`. |
+
+Файл конфигурации пересоздаётся при каждом запуске контейнера. Для изменения настройки обновите `vpn.env` и перезапустите контейнер. Файл env монтируется в контейнер через bind mount, поэтому изменения применяются при каждом перезапуске без пересоздания контейнера.
+
+## Настройка клиентов
+
+Инструкции по подключению клиентов см. в документации Headscale:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
+
+## TLS и обратный прокси
+
+Клиенты Tailscale лучше всего работают с HTTPS. Рекомендуемая схема — запустить перед Headscale обратный прокси, обрабатывающий завершение TLS, затем задать `HS_SERVER_URL` равным вашему HTTPS-URL.
+
+Используйте один из следующих адресов для обращения к контейнеру Headscale из обратного прокси:
+
+- **`headscale:8080`** — если обратный прокси запущен как контейнер в **той же Docker-сети**, что и Headscale (например, определён в одном `docker-compose.yml`). Docker автоматически разрешает имя контейнера.
+- **`127.0.0.1:8080`** — если обратный прокси запущен **на хосте** и порт `8080` опубликован (файл `docker-compose.yml` по умолчанию публикует его).
+
+> **Примечание:** Не используйте внутренний IP-адрес контейнера, полученный через `docker inspect`. Этот адрес меняется при каждом пересоздании контейнера.
+
+**Пример с [Caddy](https://caddyserver.com/docs/) ([Docker-образ](https://hub.docker.com/_/caddy))** (автоматический TLS через Let's Encrypt, обратный прокси в той же Docker-сети):
+
+`Caddyfile`:
+```
+hs.example.com {
+  reverse_proxy headscale:8080
+}
+```
+
+**Пример с nginx** (обратный прокси на хосте):
+
+```nginx
+server {
+  listen 443 ssl;
+  server_name hs.example.com;
+
+  ssl_certificate     /path/to/cert.pem;
+  ssl_certificate_key /path/to/key.pem;
+
+  location / {
+    proxy_pass http://127.0.0.1:8080;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_read_timeout 3600s;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+}
+```
+
+Задайте `HS_SERVER_URL=https://hs.example.com` в файле `vpn.env` и перезапустите контейнер.
+
+**Порты для открытия в файрволе:**
+
+| Порт | Протокол | Назначение |
+|---|---|---|
+| `8080` | TCP | Координационный сервер Headscale (или порт обратного прокси) |
+| `443` | TCP | HTTPS (при использовании обратного прокси) |
+| `9090` | TCP | Метрики Prometheus (необязательно, по умолчанию только для внутреннего использования) |
 
 ## Управление сервером
 
@@ -157,12 +239,6 @@ docker exec headscale hs_manage --deletenode 3 --yes
 docker exec headscale hs_manage --listkeys
 ```
 
-**Список ключей предварительной авторизации конкретного пользователя:**
-
-```bash
-docker exec headscale hs_manage --listkeys --user alice
-```
-
 **Показать справку:**
 
 ```bash
@@ -170,85 +246,6 @@ docker exec headscale hs_manage --help
 ```
 
 Также можно выполнять команды Headscale напрямую с помощью `docker exec headscale headscale <команда>`. Выполните `docker exec headscale headscale -h` или см. [документацию Headscale](https://headscale.net/) для просмотра доступных команд.
-
-## Настройка клиентов
-
-Инструкции по подключению клиентов см. в документации Headscale:
-
-- [Android](https://headscale.net/stable/usage/connect/android/)
-- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
-- [Windows](https://headscale.net/stable/usage/connect/windows/)
-
-## Переменные окружения
-
-Все переменные необязательны. `HS_SERVER_URL` настоятельно рекомендуется задать для production-использования.
-
-| Переменная | Значение по умолчанию | Описание |
-|---|---|---|
-| `HS_SERVER_URL` | Автоопределение | URL для подключения клиентов Tailscale (например, `https://hs.example.com`). Для полной функциональности клиентов необходим HTTPS. |
-| `HS_LISTEN_PORT` | `8080` | TCP-порт, на котором слушает сервер. |
-| `HS_METRICS_PORT` | `9090` | Порт метрик Prometheus. Оставьте пустым для отключения. |
-| `HS_BASE_DOMAIN` | `headscale.internal` | Базовый домен для имён хостов MagicDNS (например, `myhost.headscale.internal`). Не должен совпадать с именем хоста в `HS_SERVER_URL` или быть его родительским доменом (например, если `HS_SERVER_URL=https://hs.example.com`, не используйте `example.com`). |
-| `HS_USERNAME` | `admin` | Имя первого пользователя, создаваемого при начальной настройке. |
-| `HS_DNS_SRV1` | `1.1.1.1` | Основной DNS-сервер, передаваемый клиентам через MagicDNS. Принимает IPv4 или IPv6. |
-| `HS_DNS_SRV2` | `1.0.0.1` | Резервный DNS-сервер, передаваемый клиентам через MagicDNS. |
-| `HS_LOG_LEVEL` | `info` | Уровень подробности логов: `panic`, `fatal`, `error`, `warn`, `info`, `debug`, `trace`. |
-
-Файл конфигурации пересоздаётся при каждом запуске контейнера. Для изменения настройки обновите `vpn.env` и перезапустите контейнер. Файл env монтируется в контейнер через bind mount, поэтому изменения применяются при каждом перезапуске без пересоздания контейнера.
-
-## TLS и обратный прокси
-
-Клиенты Tailscale лучше всего работают с HTTPS. Рекомендуемая схема — запустить перед Headscale обратный прокси, обрабатывающий завершение TLS, затем задать `HS_SERVER_URL` равным вашему HTTPS-URL.
-
-Используйте один из следующих адресов для обращения к контейнеру Headscale из обратного прокси:
-
-- **`headscale:8080`** — если обратный прокси запущен как контейнер в **той же Docker-сети**, что и Headscale (например, определён в одном `docker-compose.yml`). Docker автоматически разрешает имя контейнера.
-- **`127.0.0.1:8080`** — если обратный прокси запущен **на хосте** и порт `8080` опубликован (файл `docker-compose.yml` по умолчанию публикует его).
-
-> **Примечание:** Не используйте внутренний IP-адрес контейнера, полученный через `docker inspect`. Этот адрес меняется при каждом пересоздании контейнера.
-
-**Пример с [Caddy](https://caddyserver.com/docs/) ([Docker-образ](https://hub.docker.com/_/caddy))** (автоматический TLS через Let's Encrypt, обратный прокси в той же Docker-сети):
-
-`Caddyfile`:
-```
-hs.example.com {
-  reverse_proxy headscale:8080
-}
-```
-
-**Пример с nginx** (обратный прокси на хосте):
-
-```nginx
-server {
-  listen 443 ssl;
-  server_name hs.example.com;
-
-  ssl_certificate     /path/to/cert.pem;
-  ssl_certificate_key /path/to/key.pem;
-
-  location / {
-    proxy_pass http://127.0.0.1:8080;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_read_timeout 3600s;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-  }
-}
-```
-
-Задайте `HS_SERVER_URL=https://hs.example.com` в файле `vpn.env` и перезапустите контейнер.
-
-**Порты для открытия в файрволе:**
-
-| Порт | Протокол | Назначение |
-|---|---|---|
-| `8080` | TCP | Координационный сервер Headscale (или порт обратного прокси) |
-| `443` | TCP | HTTPS (при использовании обратного прокси) |
-| `9090` | TCP | Метрики Prometheus (необязательно, по умолчанию только для внутреннего использования) |
 
 ## Обновление Docker-образа
 
