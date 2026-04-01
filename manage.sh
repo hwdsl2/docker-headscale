@@ -256,7 +256,7 @@ do_delete_user() {
   fi
   echo
   echo "Deleting user '$target_user'..."
-  if hs_cmd users delete --name "$target_user" 2>&1; then
+  if hs_cmd users delete --name "$target_user" --force 2>&1; then
     echo
     echo "User '$target_user' deleted."
   else
