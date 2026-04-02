@@ -6,6 +6,12 @@
 
 A Docker image to run a [Headscale](https://github.com/juanfont/headscale) server — a self-hosted, open-source implementation of the Tailscale coordination server. Connect all your devices using the official Tailscale client apps, with your own server in control.
 
+- Automatically generates server configuration and a pre-auth key on first start
+- Manage users, nodes and pre-auth keys via a helper script (`hs_manage`)
+- MagicDNS support for seamless hostname resolution across your network
+- Persistent data via a Docker volume
+- Multi-arch: `linux/amd64`, `linux/arm64`
+
 **Also available:** Docker images for [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), and [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server).
 
 ## Quick start
@@ -97,6 +103,8 @@ Alternatively, you may download from [Quay.io](https://quay.io/repository/hwdsl2
 docker pull quay.io/hwdsl2/headscale-server
 docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 ```
+
+Supported platforms: `linux/amd64` and `linux/arm64`.
 
 ## Environment variables
 
@@ -267,7 +275,7 @@ Otherwise, it will download the latest version. Remove and re-create the contain
 
 **Note:** The software components inside the pre-built image (such as Headscale) are under the respective licenses chosen by their respective copyright holders. As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
 
-Copyright (C) 2026 Lin Song
+Copyright (C) 2026 Lin Song   
 This work is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 **Headscale** is Copyright (c) 2020, Juan Font, and is distributed under the [BSD 3-Clause License](https://github.com/juanfont/headscale/blob/main/LICENSE).

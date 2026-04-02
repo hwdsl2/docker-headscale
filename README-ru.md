@@ -6,6 +6,12 @@
 
 Docker-образ для запуска сервера [Headscale](https://github.com/juanfont/headscale) — самостоятельно размещаемой реализации координационного сервера Tailscale с открытым исходным кодом. Подключите все свои устройства с помощью официальных клиентских приложений Tailscale, управляя ими через собственный сервер.
 
+- Автоматическая генерация конфигурации сервера и ключа предварительной авторизации при первом запуске
+- Управление пользователями, узлами и ключами через вспомогательный скрипт (`hs_manage`)
+- Поддержка MagicDNS для бесшовного разрешения имён хостов в сети
+- Постоянное хранение данных через Docker volume
+- Поддержка нескольких архитектур: `linux/amd64`, `linux/arm64`
+
 **Также доступно:** Docker-образы для [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-ru.md) и [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md).
 
 ## Быстрый старт
@@ -97,6 +103,8 @@ docker pull hwdsl2/headscale-server
 docker pull quay.io/hwdsl2/headscale-server
 docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 ```
+
+Поддерживаемые платформы: `linux/amd64` и `linux/arm64`.
 
 ## Переменные окружения
 
@@ -267,7 +275,7 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 **Примечание:** Программные компоненты внутри предсобранного образа (такие как Headscale) распространяются под соответствующими лицензиями, выбранными их правообладателями. При использовании любого предсобранного образа пользователь несёт ответственность за соблюдение всех соответствующих лицензий на программное обеспечение, содержащееся в образе.
 
-Copyright (C) 2026 Lin Song
+Copyright (C) 2026 Lin Song   
 Эта работа распространяется под [лицензией MIT](https://opensource.org/licenses/MIT).
 
 **Headscale** является Copyright (c) 2020, Juan Font, и распространяется под [лицензией BSD 3-Clause](https://github.com/juanfont/headscale/blob/main/LICENSE).

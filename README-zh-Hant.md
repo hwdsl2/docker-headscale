@@ -6,6 +6,12 @@
 
 一個用於運行 [Headscale](https://github.com/juanfont/headscale) 伺服器的 Docker 映像檔。Headscale 是 Tailscale 協調伺服器的自託管開源實作。使用官方 Tailscale 客戶端應用程式連線所有裝置，由你自己的伺服器掌控一切。
 
+- 首次啟動時自動產生伺服器設定和預授權金鑰
+- 透過輔助腳本（`hs_manage`）管理使用者、節點和預授權金鑰
+- 支援 MagicDNS，實現網路內主機名稱無縫解析
+- 使用 Docker 卷實現資料持久化
+- 多架構支援：`linux/amd64`、`linux/arm64`
+
 **另提供：** [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh-Hant.md) 與 [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh-Hant.md) 的 Docker 映像。
 
 ## 快速開始
@@ -97,6 +103,8 @@ docker pull hwdsl2/headscale-server
 docker pull quay.io/hwdsl2/headscale-server
 docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 ```
+
+支援平台：`linux/amd64` 和 `linux/arm64`。
 
 ## 環境變數
 
@@ -267,8 +275,8 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 **注：** 預建映像檔中的軟體元件（如 Headscale）遵循各自版權持有者所選擇的相應授權條款。對於任何預建映像檔的使用，映像檔使用者有責任確保其使用符合映像檔中所有軟體的相關授權條款。
 
-Copyright (C) 2026 Lin Song
-本作品依據[MIT 授權條款](https://opensource.org/licenses/MIT)授權。
+Copyright (C) 2026 Lin Song   
+本作品依據 [MIT 授權條款](https://opensource.org/licenses/MIT)授權。
 
 **Headscale** 的版權歸 Juan Font 所有（2020 年），遵循 [BSD 3-Clause 授權條款](https://github.com/juanfont/headscale/blob/main/LICENSE)。
 
