@@ -31,6 +31,7 @@ RUN set -x \
 
 COPY ./run.sh /opt/src/run.sh
 COPY ./manage.sh /opt/src/manage.sh
+COPY ./LICENSE.md /opt/src/LICENSE.md
 RUN chmod 755 /opt/src/run.sh /opt/src/manage.sh \
     && ln -s /opt/src/manage.sh /usr/local/bin/hs_manage
 
