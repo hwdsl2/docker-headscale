@@ -54,6 +54,14 @@ docker run \
 docker logs headscale
 ```
 
+<details>
+<summary>
+Нажмите, чтобы увидеть пример вывода.
+</summary>
+
+![screenshot](docs/images/screenshot.png)
+</details>
+
 Подключите устройство с помощью официального [клиента Tailscale](https://tailscale.com/download):
 
 ```bash
@@ -89,6 +97,14 @@ volumes:
 
 В качестве альтернативы вы можете [настроить Headscale без Docker](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md). Чтобы узнать больше о том, как использовать этот образ, прочитайте разделы ниже.
 
+## Настройка клиентов
+
+Инструкции по подключению клиентов см. в документации Headscale:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
+
 ## Загрузка
 
 Получите образ из [реестра Docker Hub](https://hub.docker.com/r/hwdsl2/headscale-server/):
@@ -122,14 +138,6 @@ docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 | `HS_LOG_LEVEL` | `info` | Уровень подробности логов: `panic`, `fatal`, `error`, `warn`, `info`, `debug`, `trace`. |
 
 Файл конфигурации пересоздаётся при каждом запуске контейнера. Для изменения настройки обновите `vpn.env` и перезапустите контейнер. Файл env монтируется в контейнер через bind mount, поэтому изменения применяются при каждом перезапуске без пересоздания контейнера.
-
-## Настройка клиентов
-
-Инструкции по подключению клиентов см. в документации Headscale:
-
-- [Android](https://headscale.net/stable/usage/connect/android/)
-- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
-- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS и обратный прокси
 

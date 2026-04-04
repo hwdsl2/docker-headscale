@@ -54,6 +54,14 @@ docker run \
 docker logs headscale
 ```
 
+<details>
+<summary>
+點擊查看範例輸出。
+</summary>
+
+![screenshot](docs/images/screenshot.png)
+</details>
+
 使用官方 [Tailscale 客戶端](https://tailscale.com/download)連線裝置：
 
 ```bash
@@ -89,6 +97,14 @@ volumes:
 
 另外，你也可以在不使用 Docker 的情況下[安裝 Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-zh-Hant.md)。若要了解更多關於如何使用本映像檔的資訊，請繼續閱讀以下部分。
 
+## 客戶端設定
+
+有關連線客戶端的說明，請參閱 Headscale 文件：
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple（iOS / macOS）](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
+
 ## 下載
 
 從 [Docker Hub 映像檔倉庫](https://hub.docker.com/r/hwdsl2/headscale-server/)取得映像檔：
@@ -122,14 +138,6 @@ docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 | `HS_LOG_LEVEL` | `info` | 日誌詳細程度：`panic`、`fatal`、`error`、`warn`、`info`、`debug`、`trace`。 |
 
 每次容器啟動時會重新產生設定檔。修改設定時，更新 `vpn.env` 並重新啟動容器即可。env 檔案以綁定掛載方式掛載至容器中，每次重新啟動時自動讀取變更，無需重新建立容器。
-
-## 客戶端設定
-
-有關連線客戶端的說明，請參閱 Headscale 文件：
-
-- [Android](https://headscale.net/stable/usage/connect/android/)
-- [Apple（iOS / macOS）](https://headscale.net/stable/usage/connect/apple/)
-- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS 與反向代理
 

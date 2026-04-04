@@ -54,6 +54,14 @@ Retrieve the initial pre-auth key from the logs:
 docker logs headscale
 ```
 
+<details>
+<summary>
+Click to see an example output.
+</summary>
+
+![screenshot](docs/images/screenshot.png)
+</details>
+
 Connect a device using the official [Tailscale client](https://tailscale.com/download):
 
 ```bash
@@ -89,6 +97,14 @@ volumes:
 
 Alternatively, you may [set up Headscale without Docker](https://github.com/hwdsl2/headscale-install). To learn more about how to use this image, read the sections below.
 
+## Client configuration
+
+Refer to the Headscale documentation for instructions on connecting clients:
+
+- [Android](https://headscale.net/stable/usage/connect/android/)
+- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
+- [Windows](https://headscale.net/stable/usage/connect/windows/)
+
 ## Download
 
 Get the trusted build from the [Docker Hub registry](https://hub.docker.com/r/hwdsl2/headscale-server/):
@@ -122,14 +138,6 @@ All variables are optional. `HS_SERVER_URL` is strongly recommended for producti
 | `HS_LOG_LEVEL` | `info` | Log verbosity: `panic`, `fatal`, `error`, `warn`, `info`, `debug`, `trace`. |
 
 The configuration file is regenerated on each container start. To change a setting, update `vpn.env` and restart the container. The env file is bind-mounted into the container, so changes are picked up on every restart without recreating the container.
-
-## Client configuration
-
-Refer to the Headscale documentation for instructions on connecting clients:
-
-- [Android](https://headscale.net/stable/usage/connect/android/)
-- [Apple (iOS / macOS)](https://headscale.net/stable/usage/connect/apple/)
-- [Windows](https://headscale.net/stable/usage/connect/windows/)
 
 ## TLS and reverse proxy
 
