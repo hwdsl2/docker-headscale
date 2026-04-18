@@ -6,13 +6,18 @@
 
 一個用於運行 [Headscale](https://github.com/juanfont/headscale) 伺服器的 Docker 映像檔。Headscale 是 Tailscale 協調伺服器的自託管開源實作。使用官方 Tailscale 客戶端應用程式連線所有裝置，由你自己的伺服器掌控一切。
 
+**功能特性：**
+
 - 首次啟動時自動產生伺服器設定和預授權金鑰
 - 透過輔助腳本（`hs_manage`）管理使用者、節點和預授權金鑰
 - 支援 MagicDNS，實現網路內主機名稱無縫解析
+- 透過 [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) 自動建置和發布
 - 使用 Docker 卷實現資料持久化
 - 多架構支援：`linux/amd64`、`linux/arm64`
 
 **另提供：**
+
+- 不使用 Docker：[Headscale 安裝腳本](https://github.com/hwdsl2/headscale-install/blob/main/README-zh-Hant.md)
 - VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh-Hant.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh-Hant.md)
 - AI/音訊：[Whisper (STT)](https://github.com/hwdsl2/docker-whisper/blob/main/README-zh-Hant.md)、[Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro/blob/main/README-zh-Hant.md)、[Embeddings](https://github.com/hwdsl2/docker-embeddings/blob/main/README-zh-Hant.md)、[LiteLLM](https://github.com/hwdsl2/docker-litellm/blob/main/README-zh-Hant.md)
 
@@ -43,6 +48,8 @@ docker run \
 ```
 
 **注：** 使用上述命令時，連接埠 `8080` 僅綁定至本地主機。需要在宿主機上運行一個處理 TLS 並將流量轉發至 `127.0.0.1:8080` 的反向代理，Tailscale 客戶端才能連線。請參閱 [TLS 與反向代理](#tls-與反向代理)。如需直接對外公開連接埠，請將 `127.0.0.1:8080:8080` 替換為 `8080:8080`。
+
+另外，你也可以在不使用 Docker 的情況下[安裝 Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-zh-Hant.md)。若要了解更多關於如何使用本映像檔的資訊，請繼續閱讀以下部分。
 
 首次啟動時，容器將：
 1. 根據環境變數產生伺服器設定
@@ -95,8 +102,6 @@ services:
 volumes:
   headscale-data:
 ```
-
-另外，你也可以在不使用 Docker 的情況下[安裝 Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-zh-Hant.md)。若要了解更多關於如何使用本映像檔的資訊，請繼續閱讀以下部分。
 
 ## 下載
 

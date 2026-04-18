@@ -4,15 +4,20 @@
 
 [![Build Status](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
-A Docker image to run a [Headscale](https://github.com/juanfont/headscale) server — a self-hosted, open-source implementation of the Tailscale coordination server. Connect all your devices using the official Tailscale client apps, with your own server in control.
+Docker image to run a [Headscale](https://github.com/juanfont/headscale) server — a self-hosted, open-source implementation of the Tailscale coordination server. Connect all your devices using the official Tailscale client apps, with your own server in control.
+
+**Features:**
 
 - Automatically generates server configuration and a pre-auth key on first start
 - Manage users, nodes and pre-auth keys via a helper script (`hs_manage`)
 - MagicDNS support for seamless hostname resolution across your network
+- Automatically built and published via [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml)
 - Persistent data via a Docker volume
 - Multi-arch: `linux/amd64`, `linux/arm64`
 
 **Also available:**
+
+- Without Docker: [Headscale install script](https://github.com/hwdsl2/headscale-install)
 - VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
 - AI/Audio: [Whisper (STT)](https://github.com/hwdsl2/docker-whisper), [Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro), [Embeddings](https://github.com/hwdsl2/docker-embeddings), [LiteLLM](https://github.com/hwdsl2/docker-litellm)
 
@@ -43,6 +48,8 @@ docker run \
 ```
 
 **Note:** With the above command, port `8080` is bound to localhost only. A reverse proxy on the host that handles TLS and forwards to `127.0.0.1:8080` is required for Tailscale clients to connect. See [TLS and reverse proxy](#tls-and-reverse-proxy). To expose the port directly instead, replace `127.0.0.1:8080:8080` with `8080:8080`.
+
+Alternatively, you may [set up Headscale without Docker](https://github.com/hwdsl2/headscale-install). To learn more about how to use this image, read the sections below.
 
 On first start, the container will:
 1. Generate the server configuration from your environment variables
@@ -95,8 +102,6 @@ services:
 volumes:
   headscale-data:
 ```
-
-Alternatively, you may [set up Headscale without Docker](https://github.com/hwdsl2/headscale-install). To learn more about how to use this image, read the sections below.
 
 ## Download
 

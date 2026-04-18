@@ -6,13 +6,18 @@
 
 Docker-образ для запуска сервера [Headscale](https://github.com/juanfont/headscale) — самостоятельно размещаемой реализации координационного сервера Tailscale с открытым исходным кодом. Подключите все свои устройства с помощью официальных клиентских приложений Tailscale, управляя ими через собственный сервер.
 
+**Возможности:**
+
 - Автоматическая генерация конфигурации сервера и ключа предварительной авторизации при первом запуске
 - Управление пользователями, узлами и ключами через вспомогательный скрипт (`hs_manage`)
 - Поддержка MagicDNS для бесшовного разрешения имён хостов в сети
+- Автоматически собирается и публикуется через [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml)
 - Постоянное хранение данных через Docker volume
 - Поддержка нескольких архитектур: `linux/amd64`, `linux/arm64`
 
 **Также доступно:**
+
+- Без Docker: [Скрипт установки Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md)
 - VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-ru.md), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md)
 - ИИ/Аудио: [Whisper (STT)](https://github.com/hwdsl2/docker-whisper/blob/main/README-ru.md), [Kokoro (TTS)](https://github.com/hwdsl2/docker-kokoro/blob/main/README-ru.md), [Embeddings](https://github.com/hwdsl2/docker-embeddings/blob/main/README-ru.md), [LiteLLM](https://github.com/hwdsl2/docker-litellm/blob/main/README-ru.md)
 
@@ -43,6 +48,8 @@ docker run \
 ```
 
 **Примечание:** При использовании приведённой команды порт `8080` привязан только к локальному хосту. Для подключения клиентов Tailscale необходим обратный прокси на хосте, который обрабатывает TLS и перенаправляет трафик на `127.0.0.1:8080`. См. раздел [TLS и обратный прокси](#tls-и-обратный-прокси). Чтобы вместо этого открыть порт напрямую, замените `127.0.0.1:8080:8080` на `8080:8080`.
+
+В качестве альтернативы вы можете [настроить Headscale без Docker](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md). Чтобы узнать больше о том, как использовать этот образ, прочитайте разделы ниже.
 
 При первом запуске контейнер:
 1. Сгенерирует конфигурацию сервера из переменных окружения
@@ -95,8 +102,6 @@ services:
 volumes:
   headscale-data:
 ```
-
-В качестве альтернативы вы можете [настроить Headscale без Docker](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md). Чтобы узнать больше о том, как использовать этот образ, прочитайте разделы ниже.
 
 ## Загрузка
 
