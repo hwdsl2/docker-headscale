@@ -101,6 +101,7 @@ services:
 
 volumes:
   headscale-data:
+    name: headscale-data
 ```
 
 ## 下載
