@@ -2,7 +2,7 @@
 
 # Сервер Headscale на Docker
 
-[![Build Status](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) &nbsp;[![Docker Pulls](https://img.shields.io/docker/pulls/hwdsl2/headscale-server)](https://hub.docker.com/r/hwdsl2/headscale-server) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) &nbsp;[![Docker Pulls](https://raw.githubusercontent.com/hwdsl2/badges/main/img/docker-pulls-headscale-server.svg)](https://hub.docker.com/r/hwdsl2/headscale-server) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
 
 Docker-образ для запуска сервера [Headscale](https://github.com/juanfont/headscale) — самостоятельно размещаемой реализации координационного сервера Tailscale с открытым исходным кодом. Подключите все свои устройства с помощью официальных клиентских приложений Tailscale, управляя ими через собственный сервер.
 
