@@ -288,6 +288,10 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 Otherwise, it will download the latest version. Remove and re-create the container using instructions from [Quick start](#quick-start). Your data is preserved in the `headscale-data` volume.
 
+## Community
+
+- Discussions and showcases: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+
 ## Technical details
 
 - Base image: `alpine:3.23`

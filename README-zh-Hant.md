@@ -288,6 +288,10 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 否則將下載最新版本。依照[快速開始](#快速開始)中的說明刪除並重新建立容器。資料保存在 `headscale-data` 卷中。
 
+## 社群
+
+- 討論與展示：[r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+
 ## 技術細節
 
 - 基礎映像檔：`alpine:3.23`
