@@ -290,7 +290,7 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 ## 社区
 
-- 讨论与展示：[r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- 讨论与更新：[r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## 技术细节
 

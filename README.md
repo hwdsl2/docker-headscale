@@ -290,7 +290,7 @@ Otherwise, it will download the latest version. Remove and re-create the contain
 
 ## Community
 
-- Discussions and showcases: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- Discussions and updates: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## Technical details
 
