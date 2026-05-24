@@ -290,7 +290,8 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 ## Сообщество
 
-- Обсуждения и обновления: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- Подпишитесь на обновления проекта: [Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
+- Обсуждения в сообществе: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## Технические детали
 

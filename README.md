@@ -290,7 +290,8 @@ Otherwise, it will download the latest version. Remove and re-create the contain
 
 ## Community
 
-- Discussions and updates: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- Subscribe for project updates: [Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
+- Community discussions: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
 
 ## Technical details
 
