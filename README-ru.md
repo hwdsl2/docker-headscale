@@ -51,6 +51,9 @@ docker run \
 
 В качестве альтернативы вы можете [настроить Headscale без Docker](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md). Чтобы узнать больше о том, как использовать этот образ, прочитайте разделы ниже.
 
+> [!TIP]
+> [Подписаться на обновления проектов](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) и получить бесплатные руководства по развёртыванию VPN и AI (PDF, на английском).
+
 При первом запуске контейнер:
 1. Сгенерирует конфигурацию сервера из переменных окружения
 2. Создаст начального пользователя (по умолчанию: `admin`)
@@ -290,8 +293,8 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 ## Сообщество
 
-- Подпишитесь на обновления проекта (1–2 письма в месяц): [Self-Hosted Stack](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)
-- Обсуждения в сообществе: [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/)
+- [Подписаться на обновления проектов](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 письма в месяц)
+- Присоединяйтесь к сообществу [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) для обсуждений
 
 ## Технические детали
 
