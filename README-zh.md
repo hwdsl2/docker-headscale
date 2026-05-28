@@ -52,7 +52,7 @@ docker run \
 另外，你也可以在不使用 Docker 的情况下[安装 Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-zh.md)。要了解更多有关如何使用本镜像的信息，请继续阅读以下部分。
 
 > [!TIP]
-> [订阅项目更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)，获取免费的 VPN 和 AI 部署指南（PDF，英文）。
+> [订阅项目更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-zh)（每月 1–2 封邮件），获取免费的 VPN 和 AI 部署指南（PDF，英文）。
 
 首次启动时，容器将：
 1. 根据环境变量生成服务器配置
@@ -293,7 +293,7 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 
 ## 社区
 
-- [订阅项目更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn)（每月 1–2 封邮件）
+- [订阅项目更新](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn-zh)（每月 1–2 封邮件）
 - 加入 [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) 社区参与讨论
 
 ## 技术细节
