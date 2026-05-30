@@ -51,9 +51,6 @@ docker run \
 
 Alternatively, you may [set up Headscale without Docker](https://github.com/hwdsl2/headscale-install). To learn more about how to use this image, read the sections below.
 
-> [!TIP]
-> [Subscribe for project updates](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month) and get free VPN and AI deployment guides (PDF).
-
 On first start, the container will:
 1. Generate the server configuration from your environment variables
 2. Create the initial user (default: `admin`)
@@ -106,6 +103,12 @@ volumes:
   headscale-data:
     name: headscale-data
 ```
+
+## Community
+
+- 📬 [Subscribe for project updates](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month) — get free VPN and AI deployment guides (PDF)
+- 💬 Join the [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) community for discussions
+- ⭐ Star the repository if it is useful to you
 
 ## Download
 
@@ -290,11 +293,6 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 ```
 
 Otherwise, it will download the latest version. Remove and re-create the container using instructions from [Quick start](#quick-start). Your data is preserved in the `headscale-data` volume.
-
-## Community
-
-- [Subscribe for project updates](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month)
-- Join the [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) community for discussions
 
 ## Technical details
 
