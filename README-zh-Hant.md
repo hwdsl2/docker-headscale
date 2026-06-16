@@ -19,7 +19,7 @@
 
 - 不使用 Docker：[Headscale 安裝腳本](https://github.com/hwdsl2/headscale-install/blob/main/README-zh-Hant.md)
 - VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh-Hant.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh-Hant.md)
-- AI：[自架 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-zh-Hant.md)
+- AI：[自架 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-zh-Hant.md)，用於本機 LLM、聊天、RAG、語音和 AI 工具
 
 ## 快速開始
 
