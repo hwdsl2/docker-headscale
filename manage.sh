@@ -32,7 +32,7 @@ Options:
   --adduser    <name>       add a new user
   --deleteuser <name>       delete a user (and all their nodes and keys)
   --deletenode <id>         delete a node by its numeric ID
-  --registernode <key>      register a node by its node key
+  --registernode <auth-id>  register a node by its auth ID
                             (requires --user <name>)
   --createkey  --user <n>   create a reusable pre-auth key for a user
   --listkeys                list all pre-auth keys
@@ -43,7 +43,7 @@ Examples:
   docker exec headscale hs_manage --listusers
   docker exec headscale hs_manage --listnodes
   docker exec headscale hs_manage --adduser alice
-  docker exec headscale hs_manage --registernode <key> --user alice
+  docker exec headscale hs_manage --registernode <auth-id> --user alice
   docker exec headscale hs_manage --createkey --user alice
   docker exec headscale hs_manage --listkeys
   docker exec -it headscale hs_manage --deleteuser alice
@@ -194,10 +194,10 @@ check_args() {
     fi
   fi
 
-  # --registernode requires a key and --user
+  # --registernode requires an auth ID and --user
   if [ "$register_node" = 1 ]; then
     if [ -z "$target_node_key" ]; then
-      exiterr "--registernode requires a node key. Copy the key shown by 'tailscale up'."
+      exiterr "--registernode requires an auth ID. Copy the auth ID shown by 'tailscale up'."
     fi
     if [ -z "$target_user" ]; then
       exiterr "--registernode requires --user <name>. Use '--listusers' to find user names."
@@ -295,13 +295,13 @@ do_delete_node() {
 do_register_node() {
   echo
   echo "Registering node for user '$target_user'..."
-  if hs_cmd nodes register --user "$target_user" --key "$target_node_key" 2>&1; then
+  if hs_cmd auth register --user "$target_user" --auth-id "$target_node_key" 2>&1; then
     echo
     echo "Node registered successfully."
   else
     echo
     echo "Failed to register node." >&2
-    echo "Make sure the node key and user name are correct." >&2
+    echo "Make sure the auth ID and user name are correct." >&2
     exit 1
   fi
   echo

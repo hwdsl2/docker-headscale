@@ -189,7 +189,10 @@ derp:
   update_frequency: 3h
 
 disable_check_updates: false
-ephemeral_node_inactivity_timeout: 30m
+
+node:
+  ephemeral:
+    inactivity_timeout: 30m
 
 database:
   type: sqlite
@@ -218,7 +221,6 @@ unix_socket_permission: "0770"
 
 logtail:
   enabled: false
-randomize_client_port: false
 EOF
 
 INITIALIZED_MARKER="/var/lib/headscale/.initialized"

@@ -57,6 +57,10 @@ jobs:
           docker logs "$TEST_ID"
           docker exec "$TEST_ID" test -S /var/run/headscale/headscale.sock
           docker exec "$TEST_ID" cat /etc/headscale/config.yaml
+          docker exec "$TEST_ID" grep -q 'node:' /etc/headscale/config.yaml
+          docker exec "$TEST_ID" grep -q 'inactivity_timeout: 30m' /etc/headscale/config.yaml
+          docker exec "$TEST_ID" sh -c "! grep -q 'ephemeral_node_inactivity_timeout' /etc/headscale/config.yaml"
+          docker exec "$TEST_ID" sh -c "! grep -q 'randomize_client_port' /etc/headscale/config.yaml"
           docker exec "$TEST_ID" hs_manage --listusers
           docker exec "$TEST_ID" hs_manage --listusers | grep -q 'admin'
           docker exec "$TEST_ID" hs_manage --listkeys
