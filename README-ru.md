@@ -212,10 +212,10 @@ server {
 
 Используйте вспомогательный скрипт `hs_manage` для управления пользователями и узлами с хоста без входа в контейнер.
 
-**Зарегистрировать узел по его ключу:**
+**Зарегистрировать узел по ID аутентификации:**
 
 ```bash
-docker exec headscale hs_manage --registernode <key> --user admin
+docker exec headscale hs_manage --registernode <auth-id> --user admin
 ```
 
 **Добавить пользователя:**
@@ -297,7 +297,7 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 ## Технические детали
 
 - Базовый образ: `alpine:3.23`
-- Headscale: 0.28.0
+- Headscale: 0.29.1
 - Каталог данных: `/var/lib/headscale` (Docker volume)
 - Конфигурация: генерируется из `vpn.env` при каждом запуске контейнера; чтобы применить изменения, обновите `vpn.env` и перезапустите контейнер (пересоздание контейнера не требуется)
 - Порты: `8080/tcp` (координационный сервер), `9090/tcp` (метрики Prometheus, необязательно)

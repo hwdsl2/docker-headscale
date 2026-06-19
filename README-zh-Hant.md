@@ -212,10 +212,10 @@ server {
 
 使用 `hs_manage` 輔助腳本從宿主機管理使用者和節點，無需進入容器。
 
-**依節點金鑰註冊節點：**
+**依認證 ID 註冊節點：**
 
 ```bash
-docker exec headscale hs_manage --registernode <key> --user admin
+docker exec headscale hs_manage --registernode <auth-id> --user admin
 ```
 
 **新增使用者：**
@@ -297,7 +297,7 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 ## 技術細節
 
 - 基礎映像檔：`alpine:3.23`
-- Headscale：0.28.0
+- Headscale：0.29.1
 - 資料目錄：`/var/lib/headscale`（Docker 卷）
 - 設定檔：每次容器啟動時從 `vpn.env` 重新生成；更新 `vpn.env` 並重新啟動容器即可套用變更（無需重新建立容器）
 - 連接埠：`8080/tcp`（協調伺服器），`9090/tcp`（Prometheus 指標，選用）
