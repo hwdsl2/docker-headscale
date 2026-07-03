@@ -2,6 +2,9 @@ name: vpn_test
 
 on: workflow_call
 
+permissions:
+  contents: read
+
 jobs:
   vpn_test:
     runs-on: ubuntu-24.04
