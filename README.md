@@ -297,7 +297,7 @@ Otherwise, it will download the latest version. Remove and re-create the contain
 ## Technical details
 
 - Base image: `alpine:3.23`
-- Headscale: 0.29.1
+- Headscale: 0.29.2
 - Data directory: `/var/lib/headscale` (Docker volume)
 - Configuration: generated from `vpn.env` on every container start; update `vpn.env` and restart to apply changes (no container re-creation needed)
 - Ports: `8080/tcp` (coordination server), `9090/tcp` (Prometheus metrics, optional)
