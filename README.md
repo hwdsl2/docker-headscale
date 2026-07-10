@@ -149,6 +149,7 @@ All variables are optional. `HS_SERVER_URL` is strongly recommended for producti
 | `HS_DNS_SRV1` | `1.1.1.1` | Primary DNS server pushed to clients via MagicDNS. Accepts IPv4 or IPv6. |
 | `HS_DNS_SRV2` | `1.0.0.1` | Secondary DNS server pushed to clients via MagicDNS. |
 | `HS_LOG_LEVEL` | `info` | Log verbosity: `panic`, `fatal`, `error`, `warn`, `info`, `debug`, `trace`. |
+| `HS_DISABLE_USAGE_COUNTS` | *(not set)* | Set to `1` to disable anonymous aggregate usage counts. |
 
 **Note:** In your `env` file, you may enclose values in single quotes, e.g. `VAR='value'`. Do not add spaces around `=`.
 
@@ -293,6 +294,10 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 ```
 
 Otherwise, it will download the latest version. Remove and re-create the container using instructions from [Quick start](#quick-start). Your data is preserved in the `headscale-data` volume.
+
+## Usage counts
+
+This image uses public GitHub release asset download counts for anonymous, aggregate usage counts. Counts are approximate and are not unique users or active installs. The image does not send a telemetry payload or use a private collector. It only attempts the best-effort count after the server starts with a mounted `/var/lib/headscale` volume, and again when that persistent install first runs a different image build. To opt out, set `HS_DISABLE_USAGE_COUNTS=1`.
 
 ## Technical details
 

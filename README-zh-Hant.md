@@ -149,6 +149,7 @@ docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 | `HS_DNS_SRV1` | `1.1.1.1` | 透過 MagicDNS 推送給客戶端的主要 DNS 伺服器，支援 IPv4 或 IPv6。 |
 | `HS_DNS_SRV2` | `1.0.0.1` | 透過 MagicDNS 推送給客戶端的次要 DNS 伺服器。 |
 | `HS_LOG_LEVEL` | `info` | 日誌詳細程度：`panic`、`fatal`、`error`、`warn`、`info`、`debug`、`trace`。 |
+| `HS_DISABLE_USAGE_COUNTS` | *（未設定）* | 設為 `1` 可停用匿名彙總使用計數。 |
 
 **注：** 在 `env` 檔案中，可以用單引號括住變數值，例如 `VAR='值'`。不要在 `=` 周圍加上空格。
 
@@ -293,6 +294,10 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 ```
 
 否則將下載最新版本。依照[快速開始](#快速開始)中的說明刪除並重新建立容器。資料保存在 `headscale-data` 卷中。
+
+## 使用計數
+
+此映像使用公開的 GitHub Release 資源下載次數進行匿名彙總使用計數。計數是近似值，不代表唯一使用者或活躍安裝。映像不會傳送遙測負載，也不會使用私有收集器。僅當伺服器啟動且掛載了 `/var/lib/headscale` 卷後，才會以盡力而為方式計數；當該持久化安裝首次執行不同映像建置時，也會再次計數。若要退出，請設定 `HS_DISABLE_USAGE_COUNTS=1`。
 
 ## 技術細節
 
