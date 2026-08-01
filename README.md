@@ -11,7 +11,7 @@ Docker image to run a [Headscale](https://github.com/juanfont/headscale) server 
 - Automatically generates server configuration and a pre-auth key on first start
 - Manage users, nodes and pre-auth keys via a helper script (`hs_manage`)
 - MagicDNS support for seamless hostname resolution across your network
-- Automatically built and published via [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml)
+- Automatically built and published via [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions)
 - Persistent data via a Docker volume
 - Multi-arch: `linux/amd64`, `linux/arm64`
 

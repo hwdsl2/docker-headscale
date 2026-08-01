@@ -11,7 +11,7 @@
 - 首次启动时自动生成服务器配置和预授权密钥
 - 通过辅助脚本（`hs_manage`）管理用户、节点和预授权密钥
 - 支持 MagicDNS，实现网络内主机名无缝解析
-- 通过 [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) 自动构建和发布
+- 通过 [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions) 自动构建和发布
 - 使用 Docker 卷实现数据持久化
 - 多架构支持：`linux/amd64`、`linux/arm64`
 

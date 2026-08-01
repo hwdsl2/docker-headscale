@@ -11,7 +11,7 @@ Docker-образ для запуска сервера [Headscale](https://githu
 - Автоматическая генерация конфигурации сервера и ключа предварительной авторизации при первом запуске
 - Управление пользователями, узлами и ключами через вспомогательный скрипт (`hs_manage`)
 - Поддержка MagicDNS для бесшовного разрешения имён хостов в сети
-- Автоматически собирается и публикуется через [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml)
+- Автоматически собирается и публикуется через [GitHub Actions](https://github.com/hwdsl2/docker-headscale/actions)
 - Постоянное хранение данных через Docker volume
 - Поддержка нескольких архитектур: `linux/amd64`, `linux/arm64`
 
