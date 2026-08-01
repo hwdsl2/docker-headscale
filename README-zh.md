@@ -302,7 +302,7 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 ## 技术细节
 
 - 基础镜像：`alpine:3.23`
-- Headscale：0.29.2
+- Headscale：0.29.3
 - 数据目录：`/var/lib/headscale`（Docker 卷）
 - 配置文件：每次容器启动时从 `vpn.env` 重新生成；更新 `vpn.env` 并重启容器即可应用更改（无需重新创建容器）
 - 端口：`8080/tcp`（协调服务器），`9090/tcp`（Prometheus 指标，可选）
