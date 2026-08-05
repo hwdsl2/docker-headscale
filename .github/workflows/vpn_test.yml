@@ -40,6 +40,7 @@ jobs:
             docker run \
               --name "$TEST_ID" \
               --restart=always \
+              -e HS_DISABLE_USAGE_COUNTS=1 \
               -v headscale-test-data:/var/lib/headscale \
               -v ./vpn.env.example:/vpn.env:ro \
               -p 8080:8080/tcp \
@@ -49,6 +50,7 @@ jobs:
             docker run \
               --name "$TEST_ID" \
               --restart=always \
+              -e HS_DISABLE_USAGE_COUNTS=1 \
               -v headscale-test-data:/var/lib/headscale \
               -p 8080:8080/tcp \
               -d \
