@@ -20,7 +20,9 @@ Docker image to run a [Headscale](https://github.com/juanfont/headscale) server 
 - Without Docker: [Headscale install script](https://github.com/hwdsl2/headscale-install)
 - VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
 - AI: [Self-Hosted AI Stack](https://github.com/hwdsl2/self-hosted-ai-stack) for local LLMs, chat, RAG, voice and AI tools
-- :books: Books: [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon), [Privacy Tools in the Age of AI](https://books2read.com/privacy)
+- 📚 Related reading: [Privacy Tools in the Age of AI](https://books2read.com/privacy)
+
+> 📘 **New book:** [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon). A practical guide to building, securing, and operating your own private AI stack.
 
 ## Quick start
 
@@ -68,7 +70,7 @@ docker logs headscale
 Click to see an example output.
 </summary>
 
-![screenshot](docs/images/screenshot.png)
+![Headscale first-run setup output showing the initial user and pre-auth key](docs/images/screenshot.png)
 </details>
 
 Connect a device using the official [Tailscale client](https://tailscale.com/download):
@@ -107,7 +109,7 @@ volumes:
 
 ## Community
 
-- 📬 [Subscribe for project updates](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month) — get free VPN and AI deployment guides (PDF)
+- 📬 [Get project updates and free deployment guides](https://selfhostedstack.beehiiv.com/subscribe?utm_campaign=vpn) (1–2 emails/month)
 - 💬 Join the [r/selfhostedstack](https://www.reddit.com/r/selfhostedstack/) community for discussions
 - ⭐ Star the repository if you find it useful — it helps others discover it
 
