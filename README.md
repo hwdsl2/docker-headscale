@@ -20,9 +20,8 @@ Docker image to run a [Headscale](https://github.com/juanfont/headscale) server 
 - Without Docker: [Headscale install script](https://github.com/hwdsl2/headscale-install)
 - VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
 - AI: [Self-Hosted AI Stack](https://github.com/hwdsl2/self-hosted-ai-stack) for local LLMs, chat, RAG, voice and AI tools
-- 📚 [Privacy Tools in the Age of AI](https://books2read.com/privacy)
 
-> 📘 Interested in self-hosted AI? [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon) is a practical guide to local LLMs, RAG, voice, and secure deployment with Docker. **Ebook: $0.99/£0.99 through Sept. 20** (US/UK).
+> 📘 Interested in self-hosted AI? [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon): **$0.99/£0.99 ebook through Sept. 20** (US/UK). A practical guide to building, securing, and operating your own private AI stack.
 
 ## Quick start
 
@@ -310,6 +309,10 @@ This image uses public GitHub release asset download counts for anonymous, aggre
 - Configuration: generated from `vpn.env` on every container start; update `vpn.env` and restart to apply changes (no container re-creation needed)
 - Ports: `8080/tcp` (coordination server), `9090/tcp` (Prometheus metrics, optional)
 - Platforms: `linux/amd64`, `linux/arm64`
+
+## Further reading
+
+📚 For broader guidance on protecting your online privacy, see [Privacy Tools in the Age of AI](https://books2read.com/privacy).
 
 ## License
 

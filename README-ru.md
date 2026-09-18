@@ -20,9 +20,8 @@ Docker-образ для запуска сервера [Headscale](https://githu
 - Без Docker: [Скрипт установки Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md)
 - VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-ru.md), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md)
 - AI: [Стек ИИ на своём сервере](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-ru.md) для локальных LLM, чата, RAG, голосовых функций и инструментов ИИ
-- 📚 [Privacy Tools in the Age of AI](https://books2read.com/privacy)
 
-> 📘 Хотите развернуть ИИ на собственном сервере? [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon) представляет собой практическое руководство по локальным большим языковым моделям, RAG, голосовому ИИ и безопасному развёртыванию с Docker. **Электронная книга: $0.99/£0.99 до 20 сентября включительно** (США/Великобритания).
+> 📘 Хотите развернуть ИИ на собственном сервере? [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon): **Электронная книга за $0.99/£0.99 до 20 сентября включительно** (США/Великобритания). Практическое руководство по созданию, защите и эксплуатации собственного приватного ИИ-стека.
 
 ## Быстрый старт
 
@@ -310,6 +309,10 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 - Конфигурация: генерируется из `vpn.env` при каждом запуске контейнера; чтобы применить изменения, обновите `vpn.env` и перезапустите контейнер (пересоздание контейнера не требуется)
 - Порты: `8080/tcp` (координационный сервер), `9090/tcp` (метрики Prometheus, необязательно)
 - Платформы: `linux/amd64`, `linux/arm64`
+
+## Дополнительная литература
+
+📚 Подробнее о защите вашей конфиденциальности в интернете читайте в книге [Privacy Tools in the Age of AI](https://books2read.com/privacy).
 
 ## Лицензия
 

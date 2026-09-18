@@ -20,9 +20,8 @@
 - 不使用 Docker：[Headscale 安装脚本](https://github.com/hwdsl2/headscale-install/blob/main/README-zh.md)
 - VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh.md)
 - AI：[自托管 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-zh.md)，用于本地 LLM、聊天、RAG、语音和 AI 工具
-- 📚 [Privacy Tools in the Age of AI](https://books2read.com/privacy)
 
-> 📘 对自托管 AI 感兴趣吗？[The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon) 是一本介绍本地大语言模型、RAG、语音 AI，以及使用 Docker 安全部署 AI 服务的实用指南。**电子书：$0.99/£0.99，优惠截至 9 月 20 日**（仅限美国/英国）。
+> 📘 对自托管 AI 感兴趣吗？[The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon)：**电子书 $0.99/£0.99，优惠截至 9 月 20 日**（仅限美国/英国）。一本关于构建、保护和运维自己的私有 AI 技术栈的实用指南。
 
 ## 快速开始
 
@@ -310,6 +309,10 @@ Status: Image is up to date for hwdsl2/headscale-server:latest
 - 配置文件：每次容器启动时从 `vpn.env` 重新生成；更新 `vpn.env` 并重启容器即可应用更改（无需重新创建容器）
 - 端口：`8080/tcp`（协调服务器），`9090/tcp`（Prometheus 指标，可选）
 - 支持平台：`linux/amd64`、`linux/arm64`
+
+## 延伸阅读
+
+📚 如需了解更多保护在线隐私的方法，请参阅 [Privacy Tools in the Age of AI](https://books2read.com/privacy)。
 
 ## 授权协议
 
