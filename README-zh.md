@@ -49,7 +49,8 @@ docker run \
   -d hwdsl2/headscale-server
 ```
 
-**注：** 使用上述命令时，端口 `8080` 仅绑定到本地主机。需要在宿主机上运行一个处理 TLS 并将流量转发到 `127.0.0.1:8080` 的反向代理，Tailscale 客户端才能连接。请参阅 [TLS 与反向代理](#tls-与反向代理)。如需直接对外发布端口，请将 `127.0.0.1:8080:8080` 替换为 `8080:8080`。
+> [!IMPORTANT]
+> 使用上述命令时，端口 `8080` 仅绑定到本地主机。需要在宿主机上运行一个处理 TLS 并将流量转发到 `127.0.0.1:8080` 的反向代理，Tailscale 客户端才能连接。请参阅 [TLS 与反向代理](#tls-与反向代理)。如需直接对外发布端口，请将 `127.0.0.1:8080:8080` 替换为 `8080:8080`。
 
 另外，你也可以在不使用 Docker 的情况下[安装 Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-zh.md)。要了解更多有关如何使用本镜像的信息，请继续阅读以下部分。
 
@@ -166,7 +167,8 @@ Tailscale 客户端在使用 HTTPS 时效果最佳。推荐的配置是在 Heads
 - **`headscale:8080`** — 如果反向代理作为容器运行在与 Headscale **相同的 Docker 网络**中（例如，在同一个 `docker-compose.yml` 中定义）。Docker 会自动解析容器名称。
 - **`127.0.0.1:8080`** — 如果反向代理运行在**宿主机上**，且端口 `8080` 已发布（默认 `docker-compose.yml` 会发布该端口）。
 
-**注：** 请勿使用通过 `docker inspect` 获取的容器内部 IP 地址。该地址在每次重新创建容器时都会改变。
+> [!NOTE]
+> 请勿使用通过 `docker inspect` 获取的容器内部 IP 地址。该地址在每次重新创建容器时都会改变。
 
 **使用 [Caddy](https://caddyserver.com/docs/)（[Docker 镜像](https://hub.docker.com/_/caddy)）的示例**（通过 Let's Encrypt 自动申请 TLS，反向代理在相同的 Docker 网络中）：
 

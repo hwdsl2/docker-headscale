@@ -49,7 +49,8 @@ docker run \
   -d hwdsl2/headscale-server
 ```
 
-**Note:** With the above command, port `8080` is bound to localhost only. A reverse proxy on the host that handles TLS and forwards to `127.0.0.1:8080` is required for Tailscale clients to connect. See [TLS and reverse proxy](#tls-and-reverse-proxy). To expose the port directly instead, replace `127.0.0.1:8080:8080` with `8080:8080`.
+> [!IMPORTANT]
+> With the above command, port `8080` is bound to localhost only. A reverse proxy on the host that handles TLS and forwards to `127.0.0.1:8080` is required for Tailscale clients to connect. See [TLS and reverse proxy](#tls-and-reverse-proxy). To expose the port directly instead, replace `127.0.0.1:8080:8080` with `8080:8080`.
 
 Alternatively, you may [set up Headscale without Docker](https://github.com/hwdsl2/headscale-install). To learn more about how to use this image, read the sections below.
 
@@ -166,7 +167,8 @@ Use one of the following addresses to reach the Headscale container from your re
 - **`headscale:8080`** — if your reverse proxy runs as a container in the **same Docker network** as Headscale (e.g. defined in the same `docker-compose.yml`). Docker resolves the container name automatically.
 - **`127.0.0.1:8080`** — if your reverse proxy runs **on the host** and port `8080` is published (the default `docker-compose.yml` publishes it).
 
-**Note:** Do not use the container's internal IP address obtained from `docker inspect`. That IP address changes every time the container is recreated.
+> [!NOTE]
+> Do not use the container's internal IP address obtained from `docker inspect`. That IP address changes every time the container is recreated.
 
 **Example with [Caddy](https://caddyserver.com/docs/) ([Docker image](https://hub.docker.com/_/caddy))** (automatic TLS via Let's Encrypt, reverse proxy in the same Docker network):
 
