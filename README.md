@@ -21,7 +21,7 @@ Docker image to run a [Headscale](https://github.com/juanfont/headscale) server 
 - VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard), [OpenVPN](https://github.com/hwdsl2/docker-openvpn), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
 - AI: [Self-Hosted AI Stack](https://github.com/hwdsl2/self-hosted-ai-stack) for local LLMs, chat, RAG, voice and AI tools
 
-> 📘 Interested in self-hosted AI? [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon): **$0.99/£0.99 ebook through Sept. 20** (US/UK). A practical guide to building, securing, and operating your own private AI stack.
+> 📘 Interested in self-hosted AI? [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon) is a practical guide to building, securing, and operating your own private AI stack.
 
 ## Quick start
 
