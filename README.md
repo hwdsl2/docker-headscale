@@ -306,7 +306,7 @@ This image uses public GitHub release asset download counts for anonymous, aggre
 ## Technical details
 
 - Base image: `alpine:3.23`
-- Headscale: 0.29.3
+- Headscale: 0.29.4
 - Data directory: `/var/lib/headscale` (Docker volume)
 - Configuration: generated from `vpn.env` on every container start; update `vpn.env` and restart to apply changes (no container re-creation needed)
 - Ports: `8080/tcp` (coordination server), `9090/tcp` (Prometheus metrics, optional)
