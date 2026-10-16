@@ -151,6 +151,7 @@ All variables are optional. `HS_SERVER_URL` is strongly recommended for producti
 | `HS_USERNAME` | `admin` | Name of the first user created on initial setup. |
 | `HS_DNS_SRV1` | `1.1.1.1` | Primary DNS server pushed to clients via MagicDNS. Accepts IPv4 or IPv6. |
 | `HS_DNS_SRV2` | `1.0.0.1` | Secondary DNS server pushed to clients via MagicDNS. |
+| `HS_DNS_EXTRA_RECORDS` | *(not set)* | Extra MagicDNS records as `name,type,value` entries separated by spaces, newlines, or semicolons. Type is `A` (IPv4) or `AAAA` (IPv6). Example: `grafana.myvpn.example.com,A,100.64.0.3`. |
 | `HS_LOG_LEVEL` | `info` | Log verbosity: `panic`, `fatal`, `error`, `warn`, `info`, `debug`, `trace`. |
 | `HS_DISABLE_USAGE_COUNTS` | *(not set)* | Set to `1` to disable anonymous aggregate usage counts. |
 

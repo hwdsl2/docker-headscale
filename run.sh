@@ -43,6 +43,78 @@ check_ip6() {
   printf '%s' "$1" | tr -d '\n' | grep -Eq "$IP6_REGEX"
 }
 
+check_dns_name() {
+  DNS_REGEX='^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$'
+  [ "${#1}" -le 253 ] && printf '%s' "$1" | tr -d '\n' | grep -Eq "$DNS_REGEX"
+}
+
+# HS_DNS_EXTRA_RECORDS is a list of name,type,value entries separated by
+# spaces, newlines, or semicolons. Tailscale only uses A and AAAA records.
+# Sets DNS_EXTRA_RECORDS_BLOCK (yaml, or empty) and HS_DNS_EXTRA_SUMMARY.
+build_dns_extra_records() {
+  local input record name rtype value
+  DNS_EXTRA_RECORDS=
+  DNS_EXTRA_RECORDS_BLOCK=
+  HS_DNS_EXTRA_SUMMARY=
+  # Drop spaces around commas so "name, A, 1.2.3.4" parses as one entry.
+  input=$(printf '%s' "$1" | sed 's/[[:space:]]*,[[:space:]]*/,/g' | tr ';[:space:]' '\n')
+  while IFS= read -r record || [ -n "$record" ]; do
+    [ -n "$record" ] || continue
+    case "$record" in
+      *,*,*) ;;
+      *) exiterr "HS_DNS_EXTRA_RECORDS entry '$record' must be name,type,value." ;;
+    esac
+    name=${record%%,*}
+    value=${record#*,}
+    rtype=${value%%,*}
+    value=${value#*,}
+    name=$(noquotes "$(nospaces "$name")")
+    rtype=$(noquotes "$(nospaces "$rtype")")
+    value=$(noquotes "$(nospaces "$value")")
+    case "$value" in
+      *,*) exiterr "HS_DNS_EXTRA_RECORDS entry '$record' must be name,type,value." ;;
+    esac
+    if [ -z "$name" ] || [ -z "$rtype" ] || [ -z "$value" ]; then
+      exiterr "HS_DNS_EXTRA_RECORDS entry '$record' must be name,type,value."
+    fi
+    if ! check_dns_name "$name"; then
+      exiterr "HS_DNS_EXTRA_RECORDS name '$name' is not a valid DNS name."
+    fi
+    rtype=$(printf '%s' "$rtype" | tr '[:lower:]' '[:upper:]')
+    case "$rtype" in
+      A)
+        if ! check_ip "$value"; then
+          exiterr "HS_DNS_EXTRA_RECORDS value '$value' is not a valid IPv4 address for A record '$name'."
+        fi
+        ;;
+      AAAA)
+        if ! check_ip6 "$value"; then
+          exiterr "HS_DNS_EXTRA_RECORDS value '$value' is not a valid IPv6 address for AAAA record '$name'."
+        fi
+        ;;
+      *)
+        exiterr "HS_DNS_EXTRA_RECORDS type '$rtype' must be A or AAAA."
+        ;;
+    esac
+    DNS_EXTRA_RECORDS="${DNS_EXTRA_RECORDS}    - name: \"${name}\"
+      type: \"${rtype}\"
+      value: \"${value}\"
+"
+    if [ -n "$HS_DNS_EXTRA_SUMMARY" ]; then
+      HS_DNS_EXTRA_SUMMARY="${HS_DNS_EXTRA_SUMMARY}, ${name} (${rtype})"
+    else
+      HS_DNS_EXTRA_SUMMARY="${name} (${rtype})"
+    fi
+  done <<< "$input"
+  if [ -n "$DNS_EXTRA_RECORDS" ]; then
+    # Drop the trailing newline so the config template keeps a single blank
+    # line before the next section.
+    DNS_EXTRA_RECORDS_BLOCK="
+  extra_records:
+${DNS_EXTRA_RECORDS%$'\n'}"
+  fi
+}
+
 check_url() {
   printf '%s' "$1" | tr -d '\n' | grep -Eq '^https?://[^[:space:]]+$'
 }
@@ -146,6 +218,8 @@ HS_DNS_SRV1=$(nospaces "$HS_DNS_SRV1")
 HS_DNS_SRV1=$(noquotes "$HS_DNS_SRV1")
 HS_DNS_SRV2=$(nospaces "$HS_DNS_SRV2")
 HS_DNS_SRV2=$(noquotes "$HS_DNS_SRV2")
+HS_DNS_EXTRA_RECORDS=$(nospaces "$HS_DNS_EXTRA_RECORDS")
+HS_DNS_EXTRA_RECORDS=$(noquotes "$HS_DNS_EXTRA_RECORDS")
 
 # Apply defaults
 [ -z "$HS_LISTEN_PORT" ]  && HS_LISTEN_PORT="8080"
@@ -186,6 +260,8 @@ fi
 if [ -n "$HS_DNS_SRV2" ] && ! check_ip "$HS_DNS_SRV2" && ! check_ip6 "$HS_DNS_SRV2"; then
   exiterr "HS_DNS_SRV2 '$HS_DNS_SRV2' is not a valid IP address."
 fi
+
+build_dns_extra_records "$HS_DNS_EXTRA_RECORDS"
 
 # Determine server URL
 if [ -n "$HS_SERVER_URL" ]; then
@@ -299,7 +375,7 @@ dns:
   override_local_dns: true
   nameservers:
     global:
-${DNS_NAMESERVERS}
+${DNS_NAMESERVERS}${DNS_EXTRA_RECORDS_BLOCK}
 
 unix_socket: /var/run/headscale/headscale.sock
 unix_socket_permission: "0770"
@@ -318,10 +394,16 @@ if [ ! -f "$INITIALIZED_MARKER" ]; then
   echo "Base domain:  $HS_BASE_DOMAIN"
   echo "Initial user: $HS_USERNAME"
   echo "DNS servers:  ${HS_DNS_SRV1}${HS_DNS_SRV2:+, ${HS_DNS_SRV2}}"
+  if [ -n "$HS_DNS_EXTRA_SUMMARY" ]; then
+    echo "DNS records:  ${HS_DNS_EXTRA_SUMMARY}"
+  fi
   echo
 else
   echo
   echo "Found existing Headscale data, starting server..."
+  if [ -n "$HS_DNS_EXTRA_SUMMARY" ]; then
+    echo "DNS records:  ${HS_DNS_EXTRA_SUMMARY}"
+  fi
   echo
 fi
 
