@@ -151,6 +151,7 @@ docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 | `HS_USERNAME` | `admin` | Имя первого пользователя, создаваемого при начальной настройке. |
 | `HS_DNS_SRV1` | `1.1.1.1` | Основной DNS-сервер, передаваемый клиентам через MagicDNS. Принимает IPv4 или IPv6. |
 | `HS_DNS_SRV2` | `1.0.0.1` | Резервный DNS-сервер, передаваемый клиентам через MagicDNS. |
+| `HS_DNS_EXTRA_RECORDS` | *(не задан)* | Дополнительные записи MagicDNS в виде `name,type,value`, разделённые пробелами, переносами строк или точкой с запятой. Тип: `A` (IPv4) или `AAAA` (IPv6). Пример: `grafana.myvpn.example.com,A,100.64.0.3`. |
 | `HS_LOG_LEVEL` | `info` | Уровень подробности логов: `panic`, `fatal`, `error`, `warn`, `info`, `debug`, `trace`. |
 | `HS_DISABLE_USAGE_COUNTS` | *(не задан)* | Установите `1`, чтобы отключить анонимные агрегированные счётчики использования. |
 

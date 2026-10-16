@@ -151,6 +151,7 @@ docker image tag quay.io/hwdsl2/headscale-server hwdsl2/headscale-server
 | `HS_USERNAME` | `admin` | 初始設定時建立的第一個使用者名稱。 |
 | `HS_DNS_SRV1` | `1.1.1.1` | 透過 MagicDNS 推送給客戶端的主要 DNS 伺服器，支援 IPv4 或 IPv6。 |
 | `HS_DNS_SRV2` | `1.0.0.1` | 透過 MagicDNS 推送給客戶端的次要 DNS 伺服器。 |
+| `HS_DNS_EXTRA_RECORDS` | *（未設定）* | 額外的 MagicDNS 記錄，格式為以空格、換行或分號分隔的 `name,type,value`。類型為 `A`（IPv4）或 `AAAA`（IPv6）。例如：`grafana.myvpn.example.com,A,100.64.0.3`。 |
 | `HS_LOG_LEVEL` | `info` | 日誌詳細程度：`panic`、`fatal`、`error`、`warn`、`info`、`debug`、`trace`。 |
 | `HS_DISABLE_USAGE_COUNTS` | *（未設定）* | 設為 `1` 可停用匿名彙總使用計數。 |
 
