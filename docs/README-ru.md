@@ -1,8 +1,8 @@
-[English](README.md) | [简体中文](README-zh.md) | [繁體中文](README-zh-Hant.md) | [Русский](README-ru.md)
+[English](../README.md) | [简体中文](README-zh.md) | [繁體中文](README-zh-Hant.md) | [Русский](README-ru.md)
 
 # Сервер Headscale на Docker
 
-[![Build Status](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) &nbsp;[![Docker Pulls](https://raw.githubusercontent.com/hwdsl2/badges/main/img/docker-pulls-headscale-server.svg)](https://hub.docker.com/r/hwdsl2/headscale-server) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) &nbsp;[![Docker Pulls](https://raw.githubusercontent.com/hwdsl2/badges/main/img/docker-pulls-headscale-server.svg)](https://hub.docker.com/r/hwdsl2/headscale-server) &nbsp;[![License: MIT](images/license.svg)](https://opensource.org/licenses/MIT)
 
 Docker-образ для запуска сервера [Headscale](https://github.com/juanfont/headscale) — самостоятельно размещаемой реализации координационного сервера Tailscale с открытым исходным кодом. Подключите все свои устройства с помощью официальных клиентских приложений Tailscale, управляя ими через собственный сервер.
 
@@ -17,9 +17,9 @@ Docker-образ для запуска сервера [Headscale](https://githu
 
 **Также доступно:**
 
-- Без Docker: [Скрипт установки Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md)
-- VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-ru.md), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md)
-- AI: [Стек ИИ на своём сервере](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-ru.md) для локальных LLM, чата, RAG, голосовых функций и инструментов ИИ
+- Без Docker: [Скрипт установки Headscale](https://github.com/hwdsl2/headscale-install/blob/main/docs/README-ru.md)
+- VPN: [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/docs/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/docs/README-ru.md), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md)
+- AI: [Стек ИИ на своём сервере](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/docs/README-ru.md) для локальных LLM, чата, RAG, голосовых функций и инструментов ИИ
 
 > 📘 Хотите развернуть ИИ на собственном сервере? [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon): практическое руководство по созданию, защите и эксплуатации собственного приватного ИИ-стека.
 
@@ -52,7 +52,7 @@ docker run \
 > [!IMPORTANT]
 > При использовании приведённой команды порт `8080` привязан только к локальному хосту. Для подключения клиентов Tailscale необходим обратный прокси на хосте, который обрабатывает TLS и перенаправляет трафик на `127.0.0.1:8080`. См. раздел [TLS и обратный прокси](#tls-и-обратный-прокси). Чтобы вместо этого открыть порт напрямую, замените `127.0.0.1:8080:8080` на `8080:8080`.
 
-В качестве альтернативы вы можете [настроить Headscale без Docker](https://github.com/hwdsl2/headscale-install/blob/main/README-ru.md). Чтобы узнать больше о том, как использовать этот образ, прочитайте разделы ниже.
+В качестве альтернативы вы можете [настроить Headscale без Docker](https://github.com/hwdsl2/headscale-install/blob/main/docs/README-ru.md). Чтобы узнать больше о том, как использовать этот образ, прочитайте разделы ниже.
 
 При первом запуске контейнер:
 1. Сгенерирует конфигурацию сервера из переменных окружения
@@ -70,7 +70,7 @@ docker logs headscale
 Нажмите, чтобы увидеть пример вывода.
 </summary>
 
-![Вывод первоначальной настройки Headscale с начальным пользователем и ключом предварительной авторизации](docs/images/screenshot.png)
+![Вывод первоначальной настройки Headscale с начальным пользователем и ключом предварительной авторизации](images/screenshot.png)
 </details>
 
 Подключите устройство с помощью официального [клиента Tailscale](https://tailscale.com/download):

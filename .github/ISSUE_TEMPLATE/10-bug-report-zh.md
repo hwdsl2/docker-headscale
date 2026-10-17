@@ -8,7 +8,7 @@ assignees: ''
 ---
 **任务列表**
 
-- [ ] 我已阅读[自述文件](https://github.com/hwdsl2/docker-headscale/blob/main/README-zh.md)或相关章节
+- [ ] 我已阅读[自述文件](https://github.com/hwdsl2/docker-headscale/blob/main/docs/README-zh.md)或相关章节
 - [ ] 我搜索了已有的 [Issues](https://github.com/hwdsl2/docker-headscale/issues?q=is%3Aissue)
 - [ ] 这个问题是关于 Headscale Docker 镜像/配置，而不只是 Headscale 或 Tailscale 客户端本身
 

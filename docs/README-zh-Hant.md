@@ -1,8 +1,8 @@
-[English](README.md) | [简体中文](README-zh.md) | [繁體中文](README-zh-Hant.md) | [Русский](README-ru.md)
+[English](../README.md) | [简体中文](README-zh.md) | [繁體中文](README-zh-Hant.md) | [Русский](README-ru.md)
 
 # 在 Docker 上運行 Headscale 伺服器
 
-[![Build Status](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) &nbsp;[![Docker Pulls](https://raw.githubusercontent.com/hwdsl2/badges/main/img/docker-pulls-headscale-server.svg)](https://hub.docker.com/r/hwdsl2/headscale-server) &nbsp;[![License: MIT](docs/images/license.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml/badge.svg)](https://github.com/hwdsl2/docker-headscale/actions/workflows/main.yml) &nbsp;[![Docker Pulls](https://raw.githubusercontent.com/hwdsl2/badges/main/img/docker-pulls-headscale-server.svg)](https://hub.docker.com/r/hwdsl2/headscale-server) &nbsp;[![License: MIT](images/license.svg)](https://opensource.org/licenses/MIT)
 
 一個用於運行 [Headscale](https://github.com/juanfont/headscale) 伺服器的 Docker 映像檔。Headscale 是 Tailscale 協調伺服器的自託管開源實作。使用官方 Tailscale 客戶端應用程式連線所有裝置，由你自己的伺服器掌控一切。
 
@@ -17,9 +17,9 @@
 
 **另提供：**
 
-- 不使用 Docker：[Headscale 安裝腳本](https://github.com/hwdsl2/headscale-install/blob/main/README-zh-Hant.md)
-- VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/README-zh-Hant.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh-Hant.md)
-- AI：[自架 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/README-zh-Hant.md)，用於本機 LLM、聊天、RAG、語音和 AI 工具
+- 不使用 Docker：[Headscale 安裝腳本](https://github.com/hwdsl2/headscale-install/blob/main/docs/README-zh-Hant.md)
+- VPN：[WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/docs/README-zh-Hant.md)、[OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/docs/README-zh-Hant.md)、[IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-zh-Hant.md)
+- AI：[自架 AI 套件](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/docs/README-zh-Hant.md)，用於本機 LLM、聊天、RAG、語音和 AI 工具
 
 > 📘 對自架 AI 有興趣嗎？[The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide?store=amazon) 是一本關於建置、保護和維運自己的私有 AI 技術堆疊的實用指南。
 
@@ -52,7 +52,7 @@ docker run \
 > [!IMPORTANT]
 > 使用上述命令時，連接埠 `8080` 僅綁定至本地主機。需要在宿主機上運行一個處理 TLS 並將流量轉發至 `127.0.0.1:8080` 的反向代理，Tailscale 客戶端才能連線。請參閱 [TLS 與反向代理](#tls-與反向代理)。如需直接對外公開連接埠，請將 `127.0.0.1:8080:8080` 替換為 `8080:8080`。
 
-另外，你也可以在不使用 Docker 的情況下[安裝 Headscale](https://github.com/hwdsl2/headscale-install/blob/main/README-zh-Hant.md)。若要了解更多關於如何使用本映像檔的資訊，請繼續閱讀以下部分。
+另外，你也可以在不使用 Docker 的情況下[安裝 Headscale](https://github.com/hwdsl2/headscale-install/blob/main/docs/README-zh-Hant.md)。若要了解更多關於如何使用本映像檔的資訊，請繼續閱讀以下部分。
 
 首次啟動時，容器將：
 1. 根據環境變數產生伺服器設定
@@ -70,7 +70,7 @@ docker logs headscale
 點擊查看範例輸出。
 </summary>
 
-![Headscale 首次執行設定輸出，顯示初始使用者和預先授權金鑰](docs/images/screenshot.png)
+![Headscale 首次執行設定輸出，顯示初始使用者和預先授權金鑰](images/screenshot.png)
 </details>
 
 使用官方 [Tailscale 客戶端](https://tailscale.com/download)連線裝置：
