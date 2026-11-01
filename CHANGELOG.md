@@ -2,6 +2,26 @@
 
 Notable changes to the Docker Headscale server are documented here.
 
+## 2026-11-01
+
+### Security
+
+- Updated Headscale to 0.29.7, including the security fixes from 0.29.6.
+- Update Tailscale clients to v1.104.4 or newer for client-side security
+  fixes, especially when using Tailscale SSH. Updating this image does not
+  update client software.
+
+### Changed
+
+- Metrics are served only on the configured metrics listener. Single-address
+  routes inside the tailnet node address ranges are no longer served.
+- Re-registering an expired tagged node requires a valid pre-auth key.
+  Another user's key or login on a tagged machine creates a separate device.
+- Oversized client metadata is rejected or trimmed under stricter limits.
+
+See the upstream [0.29.6 release notes](https://github.com/juanfont/headscale/releases/tag/v0.29.6)
+and [0.29.7 release notes](https://github.com/juanfont/headscale/releases/tag/v0.29.7).
+
 ## 2026-07-09
 
 ### Added
