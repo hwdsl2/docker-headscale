@@ -1,6 +1,7 @@
 name: build
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -24,6 +25,7 @@ jobs:
     uses: ./.github/workflows/vpn_test.yml
 
   buildx:
+    if: github.ref == 'refs/heads/main'
     needs: [shellcheck, vpn_test]
     uses: ./.github/workflows/buildx.yml
     secrets:
