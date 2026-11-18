@@ -20,8 +20,7 @@ Docker-образ для запуска сервера [Headscale](https://githu
 - **Без Docker:** [Скрипт установки Headscale](https://github.com/hwdsl2/headscale-install/blob/main/docs/README-ru.md)
 - **VPN:** [WireGuard](https://github.com/hwdsl2/docker-wireguard/blob/main/docs/README-ru.md), [OpenVPN](https://github.com/hwdsl2/docker-openvpn/blob/main/docs/README-ru.md), [IPsec VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/README-ru.md)
 - **AI:** [Стек ИИ на своём сервере](https://github.com/hwdsl2/self-hosted-ai-stack/blob/main/docs/README-ru.md) для локальных LLM, чата, RAG, голосовых функций и инструментов ИИ
-
-> 📘 Хотите развернуть ИИ на собственном сервере? **The Self-Hosted AI Builder’s Guide** ([Kindle](https://books2read.com/aiguide?store=amazon) · [Google Play](https://books2read.com/aiguide?store=google) · [книга в мягкой обложке](https://books2read.com/aiguide?store=amazon-paperback&format=PAPERBACK)): практическое руководство по созданию, защите и эксплуатации собственного приватного ИИ-стека.
+- **Книги:** [Privacy Tools in the Age of AI](https://books2read.com/privacy) · [The Self-Hosted AI Builder’s Guide](https://books2read.com/aiguide)
 
 ## Быстрый старт
 
